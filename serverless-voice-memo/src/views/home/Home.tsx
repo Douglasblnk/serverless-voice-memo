@@ -1,17 +1,7 @@
 import styles from './Home.module.scss'
+import AudioDots from '../../components/audio-dots/AudioDots';
 
 export default function Home() {
-  const arrayOfDots = [
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-    [0,1,2,3,4,5,6],
-  ];
-
   return (
     <div className={styles.homeContainer}>
       <div className={styles.wrapper}>
@@ -33,17 +23,7 @@ export default function Home() {
             </svg>
           </div>
           <div className={styles.dots}>
-            {
-              arrayOfDots.map((dots, index) =>
-                <div key={index} className={styles.dotsCol}>
-                  {
-                    dots.map(() =>
-                      <div key={['dot-', index].join(',')} className={styles.dotsDot} />
-                    )
-                  }
-                </div>
-              )
-            }
+            <AudioDots />
           </div>
         </div>
       </div>
