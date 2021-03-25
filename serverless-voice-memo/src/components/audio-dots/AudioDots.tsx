@@ -27,6 +27,6 @@ export default function AudioDots() {
   ))
 
   return (
-    <>dotList</>
+    <>{dotList}</>
   );
 }
