@@ -35,7 +35,7 @@ export default function Home() {
     setIsAudioActive(false)
     
     setTimeout(() => {
-      transitionEndHandler();
+      setIsActive(true);
     }, 500);
   }
 
@@ -64,15 +64,12 @@ export default function Home() {
     setIsAudioActive(true);
   }
 
-  const transitionEndHandler = () => setIsActive(true);
-
   return (
     <div className={styles.homeContainer}>
       <div className={styles.wrapper}>
         <div className={styles.buttonWrapper}>
           <RecordButton
             onOpen={onOpen}
-            styles={styles}
             startButtonStyle={startButtonStyle}
             startButtonRef={startButtonRef}
             svgStyle={svgStyle}
@@ -96,22 +93,21 @@ export default function Home() {
       </div>
 
       {
-        isAudioActive
-          && (
-            <div className={styles.logo}>
-              <audio
-                class={styles.audio}
-                ref={audio}
-                src={audioSrc}
-                muted={false}
-                controls
-                onLoadedMetadata={() => audio.current.play()}
-                
-              >
-                Seu navegador não suporta a tag <code>audio</code>
-              </audio>
-            </div>
-          )
+        isAudioActive && (
+          <div className={styles.logo}>
+            <audio
+              class={styles.audio}
+              ref={audio}
+              src={audioSrc}
+              muted={false}
+              controls
+              onLoadedMetadata={() => audio.current.play()}
+              
+            >
+              Seu navegador não suporta a tag <code>audio</code>
+            </audio>
+          </div>
+        )
       }
     </div>
   )
