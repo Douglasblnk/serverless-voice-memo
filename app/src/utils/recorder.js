@@ -18,6 +18,7 @@ export const recorder = {
   },
 
   startRecording(stream) {
+    this.clearRecordedBlobs()
     const options = this._setup()
 
     this.mediaRecorder = new MediaRecorder(stream, options)
@@ -45,6 +46,11 @@ export const recorder = {
 
   getRecordingURL() {
     const blob = new Blob(this.recordedBlobs, { type: this.audioType })
-    return window.URL.createObjectURL(blob)
-  }
+
+    return [window.URL.createObjectURL(blob), this.recordedBlobs]
+  },
+
+  clearRecordedBlobs() {
+    this.recordedBlobs = [];
+  },
 }
