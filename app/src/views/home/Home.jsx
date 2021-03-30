@@ -1,12 +1,15 @@
 import { useState, createRef } from 'react'
 
 import styles from './Home.module.scss'
+
+import getAudio from '../../utils/media';
+import { recorder } from '../../utils/recorder';
+import { getScale } from '../../utils/utils';
+
 import AudioDots from '../../components/audio-dots/AudioDots';
 import RecordButton from '../../components/record-button/RecordButton';
 import StopButton from '../../components/stop-button/StopButton';
-import { getScale } from '../../utils/utils';
-import getAudio from '../../utils/media';
-import { recorder } from '../../utils/recorder';
+import AudioList from '../../components/audio-list/AudioList';
 
 
 export default function Home() {
@@ -19,6 +22,7 @@ export default function Home() {
   const [isActive, setIsActive] = useState(false);
   const [isAudioActive, setIsAudioActive] = useState(false);
   const [audioSrc, setAudioSrc] = useState('');
+  const [recordedBlobs, setRecordedBlobs] = useState([]);
   
   const onOpen = () => [setupEnv(), onStartRecording()];
 
@@ -52,7 +56,9 @@ export default function Home() {
     recorder.stopRecording();
 
     setTimeout(() => {
-      const audioURL = recorder.getRecordingURL();
+      const [audioURL, audioBlobs] = recorder.getRecordingURL();
+      
+      setRecordedBlobs(previusState => ([ ...previusState, audioBlobs ]));
 
       playAudio(audioURL);
     });
@@ -66,37 +72,34 @@ export default function Home() {
 
   return (
     <div className={styles.homeContainer}>
-      <div className={styles.wrapper}>
-        <div className={styles.buttonWrapper}>
-          <RecordButton
-            onOpen={onOpen}
-            startButtonStyle={startButtonStyle}
-            startButtonRef={startButtonRef}
-            svgStyle={svgStyle}
-          />
-        </div>
+      <RecordButton
+        onOpen={onOpen}
+        startButtonStyle={startButtonStyle}
+        startButtonRef={startButtonRef}
+        svgStyle={svgStyle}
+      />
 
-        <div
-          className={`${styles.activeWrapper} ${isActive ? styles.active : ''}`}
-          style={isActive ? { backgroundColor: 'rgb(255, 100, 100)' } : {}}
-        >
-          <StopButton
-            styles={styles}
-            stopButtonRef={stopButtonRef}
-            onClose={onClose}
-          />
+      <div
+        className={`${styles.activeWrapper} ${isActive ? styles.active : ''}`}
+        style={isActive ? { backgroundColor: 'rgb(255, 100, 100)' } : {}}
+      >
+        <StopButton
+          stopButtonRef={stopButtonRef}
+          onClose={onClose}
+        />
 
-          <div className={styles.dots}>
-            <AudioDots isActive={isActive} />
-          </div>
+        <div className={styles.dots}>
+          <AudioDots isActive={isActive} />
         </div>
       </div>
+
+      <AudioList recordedBlobs={recordedBlobs} />
 
       {
         isAudioActive && (
           <div className={styles.logo}>
             <audio
-              class={styles.audio}
+              className={styles.audio}
               ref={audio}
               src={audioSrc}
               muted={false}
