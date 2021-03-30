@@ -1,9 +1,10 @@
+import styles from './RecordButton.module.scss'
+
 export default function RecordButton({
   startButtonRef,
   startButtonStyle,
   svgStyle,
   onOpen,
-  styles,
 }) {
   return (
     <div

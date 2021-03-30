@@ -1,5 +1,6 @@
+import styles from './StopButton.module.scss';
+
 export default function StopButton({
-  styles,
   stopButtonRef,
   onClose
 }) {
