@@ -15,7 +15,6 @@ import AudioList from '../../components/audio-list/AudioList';
 export default function Home() {
   const startButtonRef = createRef();
   const stopButtonRef = createRef();
-  const audio = createRef();
   
   const [startButtonStyle, setStartButtonStyle] = useState({});
   const [svgStyle, setSvgStyle] = useState({});
@@ -93,25 +92,10 @@ export default function Home() {
         </div>
       </div>
 
-      <AudioList recordedBlobs={recordedBlobs} />
-
-      {
-        isAudioActive && (
-          <div className={styles.logo}>
-            <audio
-              className={styles.audio}
-              ref={audio}
-              src={audioSrc}
-              muted={false}
-              controls
-              onLoadedMetadata={() => audio.current.play()}
-              
-            >
-              Seu navegador não suporta a tag <code>audio</code>
-            </audio>
-          </div>
-        )
-      }
+      <AudioList
+        recordedBlobs={recordedBlobs}
+        audioSrc={audioSrc}
+      />
     </div>
   )
 }
