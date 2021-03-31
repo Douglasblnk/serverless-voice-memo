@@ -1,3 +1,48 @@
 .audioPlayerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 5px 20px;
+  background-color: rgb(37, 37, 37);
   
+  > div {
+    display: flex;
+    align-items: center;
+
+    p {
+      color: #555;
+      font-weight: 500;
+    }
+  }
+
+  .playIcon {
+    color: rgb(194, 194, 194);
+    font-size: 2rem;
+    transition: .2s;
+    cursor: pointer;
+
+    &:hover { transform: scale(1.2) }
+    &:active { transform: scale(1) }
+  }
+
+  .trashIcon {
+    font-size: 18px;
+    color: rgb(151, 151, 151);
+    margin-left: 20px;
+    transition: .2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2)
+    }
+
+    &:active {
+      transform: scale(1)
+    }
+  }
+
+  .logo {
+    display: none;
+  }
 }

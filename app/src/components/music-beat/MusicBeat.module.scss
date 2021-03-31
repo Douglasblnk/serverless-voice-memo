@@ -1,16 +1,15 @@
 .wrapper {
-  width: 500px;
-  height: 60px;
+  height: 50px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
   div {
     width: 5px;
     height: 30px;
     margin: 0 3px;
     border-radius: 50px;
-    animation-iteration-count: infinite;
-    animation-iteration-function: linear;
+    // animation-iteration-count: infinite;
+    // animation-iteration-function: linear;
   }
 
   div.line1 {
@@ -50,43 +49,43 @@
   
   @keyframes animate1 {
     50% {
-      height: 60px;
+      height: 20px;
     }
   }
   
   @keyframes animate2 {
     50% {
-      height: 10px;
+      height: 5px;
     }
   }
   
   @keyframes animate3 {
     50% {
-      height: 50px;
+      height: 30px;
     }
   }
   
   @keyframes animate4 {
     50% {
-      height: 60px;
+      height: 40px;
     }
   }
   
   @keyframes animate5 {
     50% {
-      height: 10px;
+      height: 5px;
     }
   }
   
   @keyframes animate6 {
     50% {
-      height: 10px;
+      height: 5px;
     }
   }
   
   @keyframes animate7 {
     50% {
-      height: 40px;
+      height: 20px;
     }
   }
 }
