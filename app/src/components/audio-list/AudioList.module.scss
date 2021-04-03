@@ -1,5 +1,24 @@
 .audioListContainer {
   width: 30rem;
-  padding: 20px;
-  margin: 20px 0;
+  padding: 0 20px;
+  max-height: 400px;
+  overflow: auto;
+  margin-top: 40px;
+  
+  .audioList {
+    margin-bottom: 10px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #979797;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #979797;
 }
