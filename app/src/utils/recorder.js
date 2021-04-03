@@ -44,10 +44,14 @@ export const recorder = {
     console.log('media recordes stopped', this.mediaRecorder)
   },
 
-  getRecordingURL() {
-    const blob = new Blob(this.recordedBlobs, { type: this.audioType })
+  getRecordingURL(recordedBlobs) {
+    const blob = new Blob(recordedBlobs, { type: this.audioType })
 
-    return [window.URL.createObjectURL(blob), this.recordedBlobs]
+    return window.URL.createObjectURL(blob)
+  },
+
+  getBlob() {
+    return this.recordedBlobs;
   },
 
   clearRecordedBlobs() {
