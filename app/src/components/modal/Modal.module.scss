@@ -1,0 +1,32 @@
+.modalContainer {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.356);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
+
+  .modalContent {
+    background-color: white;
+    padding: 2rem 5rem 1rem;
+    border-radius: 20px;
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 20px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+  }
+}
