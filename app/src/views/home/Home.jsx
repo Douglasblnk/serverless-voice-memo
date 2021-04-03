@@ -19,8 +19,6 @@ export default function Home() {
   const [startButtonStyle, setStartButtonStyle] = useState({});
   const [svgStyle, setSvgStyle] = useState({});
   const [isActive, setIsActive] = useState(false);
-  const [isAudioActive, setIsAudioActive] = useState(false);
-  const [audioSrc, setAudioSrc] = useState('');
   const [recordedBlobs, setRecordedBlobs] = useState([]);
   
   const onOpen = () => [setupEnv(), onStartRecording()];
@@ -34,9 +32,7 @@ export default function Home() {
       transform: 'scale(0.5)',
       opacity: '0%'
     });
-  
-    setIsAudioActive(false)
-    
+      
     setTimeout(() => {
       setIsActive(true);
     }, 500);
@@ -55,18 +51,17 @@ export default function Home() {
     recorder.stopRecording();
 
     setTimeout(() => {
-      const [audioURL, audioBlobs] = recorder.getRecordingURL();
+      const audioBlobs = recorder.getBlob();
       
       setRecordedBlobs(previusState => ([ ...previusState, audioBlobs ]));
-
-      playAudio(audioURL);
     });
   }
 
-  const playAudio = url => {
-    setAudioSrc(url);
 
-    setIsAudioActive(true);
+  const removeBlob = (index) => {
+    setRecordedBlobs(currentRecordedBlob => currentRecordedBlob.filter(
+      (_, i) => i !== index)
+    );
   }
 
   return (
@@ -94,7 +89,7 @@ export default function Home() {
 
       <AudioList
         recordedBlobs={recordedBlobs}
-        audioSrc={audioSrc}
+        removeAudio={removeBlob}
       />
     </div>
   )
