@@ -1,0 +1,21 @@
+.buttonContainer {
+  button {
+    border: 0;
+    padding: 7px 25px;
+    margin: 0 3px;
+    border-radius: 50px;
+    outline: none;
+    transition: .2s;
+    cursor: pointer;
+    color: white;
+    box-shadow: 2px 2px 12px -7px black;
+
+    &:hover {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
