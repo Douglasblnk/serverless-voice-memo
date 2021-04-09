@@ -1,0 +1,20 @@
+{
+  "name": "serverless-voice-memo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app": "npm run app --prefix app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Douglasblnk/serverless-voice-memo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Douglasblnk/serverless-voice-memo/issues"
+  },
+  "homepage": "https://github.com/Douglasblnk/serverless-voice-memo#readme"
+}
