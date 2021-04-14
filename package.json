@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "app": "npm run app --prefix app",
+    "api": "npm run api --prefix api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
