@@ -1,24 +1,30 @@
 service: voice-memo-api
 
-frameworkVersion: '2'
-
 provider:
   name: aws
   stage: api
   runtime: nodejs12.x
 
 functions:
-  hello:
+  getAudios:
     handler: handler.hello
     memorySize: 128
     events:
       - http:
           method: get
-          path: /poxa
+          path: /audios
+
+  saveAudio:
+    handler: handler.hello
+    memorySize: 128
+    events:
+      - http:
+          method: post
+          path: /audio
 
 custom:
   serverless-offline:
-     httpPort: 4000
+    httpPort: 4000
 
 plugins:
   - serverless-offline
