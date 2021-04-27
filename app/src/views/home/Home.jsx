@@ -1,4 +1,5 @@
 import { useState, createRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './Home.module.scss'
 
@@ -19,7 +20,10 @@ export default function Home() {
   const [startButtonStyle, setStartButtonStyle] = useState({});
   const [svgStyle, setSvgStyle] = useState({});
   const [isActive, setIsActive] = useState(false);
-  const [recordedBlobs, setRecordedBlobs] = useState([]);
+
+  const recordedBlobs = useSelector(state => state);
+  
+  const dispatch = useDispatch()
   
   const onOpen = () => [setupEnv(), onStartRecording()];
 
@@ -53,16 +57,20 @@ export default function Home() {
     setTimeout(() => {
       const audioBlobs = recorder.getBlob();
       
-      setRecordedBlobs(previusState => ([ ...previusState, audioBlobs ]));
+      addAudioBlobs(audioBlobs)
     });
   }
-
-
+  
+  
   const removeBlob = (index) => {
-    setRecordedBlobs(currentRecordedBlob => currentRecordedBlob.filter(
-      (_, i) => i !== index)
-    );
+    const newRecoredBlobsList = recordedBlobs.filter((_, i) => i !== index);
+    
+    updateAudioBlobs(newRecoredBlobsList)
   }
+  
+  const addAudioBlobs = audioBlobs => dispatch({ type: 'add', data: audioBlobs });
+
+  const updateAudioBlobs = audioBlobs => dispatch({ type: 'update', data: audioBlobs });
 
   return (
     <div className={styles.homeContainer}>
