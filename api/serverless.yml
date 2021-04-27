@@ -12,7 +12,7 @@ functions:
     events:
       - http:
           method: get
-          path: /audios
+          path: /audio
 
   saveAudio:
     handler: handler.hello
