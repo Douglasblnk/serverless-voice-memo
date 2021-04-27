@@ -10,7 +10,6 @@ export default function AudioList({ recordedBlobs, removeAudio }) {
           <div key={`audioBlob-${index}`} className={styles.audioList}>
             <AudioPlayer
               audioBlob={audioBlob}
-              audioTitle={`Audio ${index + 1}`}
               audioIndex={index}
               removeAudio={removeAudio}
             />
