@@ -1,7 +1,11 @@
+import { saveAudio } from "../services/AudioServices"
+import store from '../store/index'
+
 export const recorder = {
   audioType: 'audio/webm;codecs=opus',
   mediaRecorder: {},
-  recordedBlobs: [],
+  storeBlobs: store.getState(),
+  blobs: {},
 
   _setup() {
     const options = { mimeType: this.audioType }
@@ -23,25 +27,24 @@ export const recorder = {
 
     this.mediaRecorder = new MediaRecorder(stream, options)
 
-    this.mediaRecorder.onstop = event => {
-      console.log(`recorded blobs`, this.recordedBlobs)
-    }
+    this.mediaRecorder.onstop = () => saveAudio({ recordedBlobs: this.blobs })
 
     this.mediaRecorder.ondataavailable = event => {
       if (!event.data || !event.data.size) return
 
-      this.recordedBlobs.push(event.data)
+      this.blobs = {
+        title: `Audio ${this.storeBlobs.length + 1}`,
+        data: [event.data],
+      }
     }
 
     this.mediaRecorder.start()
-    console.log('media recordes started', this.mediaRecorder)
   },
 
   async stopRecording() {
     if (this.mediaRecorder.state === 'inactive') return
 
     this.mediaRecorder.stop()
-    console.log('media recordes stopped', this.mediaRecorder)
   },
 
   getRecordingURL(recordedBlobs) {
@@ -51,10 +54,10 @@ export const recorder = {
   },
 
   getBlob() {
-    return this.recordedBlobs;
+    return this.blobs;
   },
 
   clearRecordedBlobs() {
-    this.recordedBlobs = [];
+    this.blobs = [];
   },
 }
