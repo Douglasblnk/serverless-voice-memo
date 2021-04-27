@@ -17,7 +17,6 @@ import reactDom from 'react-dom';
 
 export default function AudioPlayer({
   audioBlob,
-  audioTitle,
   audioIndex,
   removeAudio,
 }) {
@@ -28,7 +27,7 @@ export default function AudioPlayer({
   const [audioSrc, setAudioSrc] = useState('');
 
   useEffect(() => {
-    const url = recorder.getRecordingURL(audioBlob);
+    const url = recorder.getRecordingURL(audioBlob.data);
 
     setAudioSrc(url);
   }, [])
@@ -57,7 +56,7 @@ export default function AudioPlayer({
     <div className={styles.titleWrapper}>
       <FaRegQuestionCircle />
       <h3 className={styles.title}>Deseja remover o áudio?</h3>
-      <span>{audioTitle}</span>
+      <span>{audioBlob.title}</span>
     </div>
   );
   
@@ -87,7 +86,7 @@ export default function AudioPlayer({
         />
 
         <div className={styles.audioTitle}>
-          <p>{ audioTitle }</p>
+          <p>{ audioBlob.title }</p>
         </div>
       </div>
 
