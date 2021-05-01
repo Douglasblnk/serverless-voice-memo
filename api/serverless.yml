@@ -4,6 +4,8 @@ provider:
   name: aws
   stage: api
   runtime: nodejs12.x
+  environment:
+    bucket_name: ${file(./serverless-config.yml):bucket}
 
 functions:
   getAudios:
@@ -15,7 +17,7 @@ functions:
           path: /audio
 
   saveAudio:
-    handler: handler.hello
+    handler: src/routes/audio/set.run
     memorySize: 128
     events:
       - http:
