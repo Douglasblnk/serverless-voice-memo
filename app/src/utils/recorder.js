@@ -1,4 +1,4 @@
-import { saveAudio } from "../services/AudioServices"
+import { saveAudioProcess } from "../services/AudioServices"
 import store from '../store/index'
 
 export const recorder = {
@@ -27,7 +27,7 @@ export const recorder = {
 
     this.mediaRecorder = new MediaRecorder(stream, options)
 
-    this.mediaRecorder.onstop = () => saveAudio({ recordedBlobs: this.blobs })
+    this.mediaRecorder.onstop = () => saveAudioProcess({ recordedBlobs: this.blobs })
 
     this.mediaRecorder.ondataavailable = event => {
       if (!event.data || !event.data.size) return
