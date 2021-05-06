@@ -36,8 +36,14 @@ const getBody = (event, defaultValue = null) => {
   }
 }
 
+const lambdaResponse = (status, body) => ({
+  statusCode: status,
+  body: JSON.stringify({ response: body })
+})
+
 module.exports = {
   get,
   getBody,
-  isObject
+  isObject,
+  lambdaResponse,
 }
