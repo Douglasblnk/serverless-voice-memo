@@ -1,5 +1,5 @@
-const saveAudio = require('../../services/audio/save-audio');
-const { get, getBody } = require('../../utils/utils');
+const getSignedUpload = require('../../services/audio/getSignedUpload');
+const { get, getBody, lambdaResponse } = require('../../utils/utils');
 
 const getParameters = event => {
   const body = getBody(event)
@@ -25,10 +25,10 @@ module.exports.run = async event => {
     const errors = validateParams(parameters)
     if (Object.keys(errors).length) throw new Error('Invalid parameters')
 
-    const response = await saveAudio(parameters);
-    console.log(`response`, response)
-    return { response }
+    const response = await getSignedUpload(parameters);
+
+    return lambdaResponse(200, response)
   } catch (err) {
-    console.log(`run set audio`, err)
+    return lambdaResponse(500, err)
   }
 };
