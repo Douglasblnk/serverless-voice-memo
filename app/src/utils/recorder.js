@@ -2,9 +2,8 @@ import { saveAudioProcess } from "../services/AudioServices"
 import store from '../store/index'
 
 export const recorder = {
-  audioType: 'audio/webm;codecs=opus',
+  audioType: 'audio/webm',
   mediaRecorder: {},
-  storeBlobs: store.getState(),
   blobs: {},
 
   _setup() {
@@ -33,7 +32,7 @@ export const recorder = {
       if (!event.data || !event.data.size) return
 
       this.blobs = {
-        title: `Audio ${this.storeBlobs.length + 1}`,
+        title: `Audio ${store.getState().length + 1}`,
         data: [event.data],
       }
     }

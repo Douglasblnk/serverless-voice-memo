@@ -4,14 +4,11 @@ module.exports = async ({
   audioTitle,
   audioExtension,
 }) => {
-  const bucketName = await getS3BucketName();
-
   const s3Params = {
-    Bucket: bucketName,
+    Bucket: process.env.bucket_name,
     Key: audioTitle,
     Expires: 30000,
     ContentType: audioExtension,
-    ACL: 'public-read'
   };
 
   const signedUrl = await getSignedUrl(s3Params)
@@ -24,5 +21,3 @@ const getSignedUrl = async params => {
 
   return s3.getSignedUrl('putObject', params)
 }
-
-const getS3BucketName = async () => process.env.bucket_name

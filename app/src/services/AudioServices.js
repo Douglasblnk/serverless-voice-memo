@@ -1,5 +1,19 @@
 import axios from 'axios';
 
+function getFileContent(recordedBlobs) {
+  const currentDate = new Date();
+
+  const { title, data: [blob] } = recordedBlobs;
+
+  const file = new File([blob], currentDate.valueOf(), { type: 'audio/mp3' })
+
+  return {
+    title,
+    fileType: file.type,
+    file,
+  }
+}
+
 export async function getAudios() {
   try {
 
@@ -19,28 +33,25 @@ export async function getSignedUrl({ title, fileType }) {
   })
 }
 
-export async function saveAudio({ blob, fileType, signedUrl }) {
+export async function saveAudio({ file, fileType, signedUrl }) {
+  console.log(`file`, file)
   return axios({
     method: 'PUT',
     url: signedUrl,
     headers: {
       'Content-Type': fileType,
     },
-    data: {
-      blob
-    }
+    data: file
   })
 }
 
 export async function saveAudioProcess({ recordedBlobs }) {
   try {
-    const { title, data: [blob] } = recordedBlobs;
-
-    const fileType = blob.type
+    const { title, fileType, file } = getFileContent(recordedBlobs)
 
     const { data } = await getSignedUrl({ title, fileType })
 
-    const response = await saveAudio({ blob, fileType, signedUrl: data.response })
+    const response = await saveAudio({ file, fileType: file.type, signedUrl: data.response })
 
     console.log(`response`, response)
   } catch (err) {
